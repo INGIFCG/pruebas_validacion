@@ -16,16 +16,24 @@
   $password = "";
   $countri = "";
   $level = "";
+  $lenguaje = array();
 
   if (isset($_POST['submit'])) {
     $username = $_POST['username'];
     $email = $_POST['email'];
     $password = $_POST['password'];
     $countri = $_POST['countri'];
-    if(isset($_POST['level'])){
+    
+    if (isset($_POST['level'])) {
       $level = $_POST['level'];
-    }else{
-      $level ="";
+    } else {
+      $level = "";
+    }
+    
+    if (isset($_POST['lenguaje'])) {
+      $lenguaje = $_POST['lenguaje'];
+    } else {
+      $lenguaje = [];
     }
 
     $validacion = array();
@@ -39,16 +47,19 @@
     if (empty($password) || strlen($password) < 6) {
       array_push($validacion, " El password no puede estar vacio o tener menos de 7 caracteres");
     }
-    if ($countri== "") {
+    if ($countri == "") {
       array_push($validacion, "Debe seleccionar un pais para continuar");
     }
-    if ($level== "") {
+    if ($level == "") {
       array_push($validacion, "Debe seleccionar un nivel de desarollador para continuar");
+    }
+    if ($lenguaje == "" || count($lenguaje) < 0) {
+      array_push($validacion, "Debe seleccionar al menos 1 lenguaje de programacion");
     }
     if (count($validacion) > 0) {
       foreach ($validacion as $val) {
         echo "<div class='error'><li>" . $val . "</li></div>";
-      }  
+      }
     } else {
       echo "<div class='Correcto'>
                     Datos correctos";
@@ -71,19 +82,26 @@
       <div class="input_form">
         <select name="countri" id="countri">
           <option value="">Select a countri</option>
-          <option value="vz"<?php if($countri== "vz") echo "selected";?>>Venezuela</option>
-          <option value="cl"<?php if($countri== "cl") echo "selected";?>>Colombia</option>
-          <option value="mx"<?php if($countri== "mx") echo "selected";?>>Mexico</option>
-          <option value="eu"<?php if($countri== "eu") echo "selected";?>>Estados Unidos</option>
+          <option value="vz" <?php if ($countri == "vz") echo "selected"; ?>>Venezuela</option>
+          <option value="cl" <?php if ($countri == "cl") echo "selected"; ?>>Colombia</option>
+          <option value="mx" <?php if ($countri == "mx") echo "selected"; ?>>Mexico</option>
+          <option value="eu" <?php if ($countri == "eu") echo "selected"; ?>>Estados Unidos</option>
         </select>
       </div>
       <div class="input_form">
-        <input type="radio" name="level" <?php if($level=="basic")echo "cheked"?>value="basic"> Basic</input>
-        <input type="radio" name="level" <?php if($level=="medium")echo "cheked"?>value="medium"> Medium</input>
-        <input type="radio" name="level" <?php if($level=="hard")echo "cheked"?>value="hard"> Hard</input>
-        <input type="radio" name="level" <?php if($level=="master")echo "cheked"?>value="master"> Master</input>
+        <p>Development level</p>
+        <input type="radio" name="level" value="basic" <?php if ($level == "basic") echo "checked" ?>> Basic</input>
+        <input type="radio" name="level" value="medium" <?php if ($level == "medium") echo "checked" ?>> Medium</input>
+        <input type="radio" name="level" value="hard" <?php if ($level == "hard") echo "checked" ?>> Hard</input>
+        <input type="radio" name="level" value="master"<?php if ($level == "master") echo "checked" ?>> Master</input>
       </div>
-      
+      <div class="input_form">
+        <p>Programing Lenguaje</p>
+        <input type="checkbox" name="lenguaje[]" value="php" <?php if (in_array("php", $lenguaje)) echo "checked" ?>> PHP</input>
+        <input type="checkbox" name="lenguaje[]" value="jv" <?php if (in_array("jv", $lenguaje)) echo "checked" ?>>Java</input>
+        <input type="checkbox" name="lenguaje[]" value="py" <?php if (in_array("py", $lenguaje)) echo "checked" ?>> Python</input>
+        <input type="checkbox" name="lenguaje[]" value="ja" <?php if (in_array("ja", $lenguaje)) echo "checked" ?>>Javascript</input>
+      </div>
       <div class="button">
         <input type="submit" name="submit" id="submit">
       </div>
