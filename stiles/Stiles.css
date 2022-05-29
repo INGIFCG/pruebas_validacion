@@ -1,0 +1,52 @@
+html{
+    height: 100%;
+}
+* {
+  padding: 0;
+  margin: 0;
+}
+body{
+    background: linear-gradient(#0077b6,#0077b6,#0096c7);
+}
+.container{
+
+    padding: 30px ;
+    border: 2px solid #111;
+    width: 400px;
+    margin: 230px auto;
+    text-align: center;
+    border-radius: 20px;
+    background-color:#4a93a0;
+
+}
+
+.input_form{
+
+    padding: 10px;
+}
+
+input[type="text"], input[type="password"],input[type="email"]{
+
+    background-color: white;
+    border-radius: 5px;
+
+}
+
+.error{
+    width: 20%;
+    text-align: center;
+    background-color: red;
+    color: white;
+    display: inline-block;
+    font-size: 16px;
+    padding: 2px;
+    margin: 20px 55px;
+    border-radius: 3%;
+}
+.Correcto{
+
+    background-color: greenyellow;
+    color: white;
+    font-size: 30px;
+    padding: 10px;
+}
